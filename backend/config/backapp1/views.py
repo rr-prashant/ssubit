@@ -1,8 +1,8 @@
 from django.contrib.auth.models import Group, User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from config.backapp1.serializers import UserSerializer, GroupSerializer
-from django.http import HttpResponse
+from config.backapp1.serializers import UserSerializer, GroupSerializer, ItemsSerializer
+from .models import Items
 
 @api_view(["GET"])
 def UserView(request):
@@ -16,5 +16,8 @@ def GroupView(request):
     serializer = GroupSerializer(queryset, many=True)
     return Response(serializer.data)
 
-def hello(request):
-    return HttpResponse('Hellow status: 200')
+@api_view(["GET"])
+def ItemView(request):
+    queryset = Items.objects.all()
+    serializer_class = ItemsSerializer(queryset, many= True)
+    return Response(serializer_class.data)
