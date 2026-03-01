@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from rest_framework import serializers
-from .models import Items
+from .models import AnalysisModel, PostAnalysedModel
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,7 +14,12 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ["id", "name"]
 
-class ItemsSerializer(serializers.ModelSerializer):
+class AnalysisSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Items
-        fields = "__all__"
+        model = AnalysisModel
+        fields = ["__all__"]
+
+class PostAnalysedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostAnalysedModel
+        fields = ["__all__"]
